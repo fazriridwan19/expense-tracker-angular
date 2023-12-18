@@ -1,13 +1,51 @@
 <div>
-  <div class="container mt-5">
+  <div class="container mt-5 w-50">
     <div class="card">
       <div class="card-header">
         <h4>
           Create new expense
-          <a routerLink="/" class="btn btn-danger float-end">Back</a>
+          <a routerLink="../" class="btn btn-danger float-end">Back</a>
         </h4>
       </div>
-      <div class="card-body">body</div>
+      <div class="card-body">
+        <div *ngIf="isLoading; else thenBlock">
+          <app-loader :title="loadingTitle" />
+        </div>
+        <ng-template #thenBlock>
+          <form [formGroup]="applyForm" (submit)="createExpense()">
+            <div class="mb-3">
+              <label for="titleEx" class="form-label">Title</label>
+              <input
+                formControlName="title"
+                id="titleEx"
+                type="text"
+                class="form-control"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="desEx" class="form-label">Description</label>
+              <textarea
+                formControlName="description"
+                id="desEx"
+                class="form-control"
+                aria-describedby="emailHelp"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="amountEx" class="form-label">Amount</label>
+              <input
+                formControlName="amount"
+                id="amountEx"
+                type="number"
+                class="form-control"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>
